@@ -1,0 +1,197 @@
+@{
+    ViewData["Title"] = "Agendamento";
+}
+
+<div class="agendamento-header">
+    <h2 class="center-align">Faça seu Pedido</h2>
+    <p class="center-align flow-text">Reserve seus pratos favoritos com antecedência</p>
+</div>
+
+<div class="row">
+    <form class="col s12" method="post">
+        <!-- Dados do Cliente -->
+        <div class="section">
+            <h5>Seus Dados</h5>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">person</i>
+                    <input id="nome" name="nome" type="text" class="validate" required>
+                    <label for="nome">Nome Completo</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">phone</i>
+                    <input id="telefone" name="telefone" type="tel" class="validate" required>
+                    <label for="telefone">Telefone</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">email</i>
+                    <input id="email" name="email" type="email" class="validate" required>
+                    <label for="email">E-mail</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data e Hora -->
+        <div class="section">
+            <h5>Data e Hora da Retirada</h5>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">event</i>
+                    <input id="data" name="data" type="date" class="validate" required>
+                    <label for="data">Data</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">access_time</i>
+                    <input id="hora" name="hora" type="time" class="validate" required>
+                    <label for="hora">Hora</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seleção de Itens -->
+        <div class="section">
+            <h5>Selecione seus Itens</h5>
+            <div class="row">
+                <!-- Caldos -->
+                <div class="col s12">
+                    <h6>Caldos</h6>
+                    <div class="row">
+                        <div class="col s12 m6">
+                            <label>
+                                <input type="checkbox" class="filled-in" name="items[]" value="caldo-verde" />
+                                <span>Caldo Verde - R$ 28,90</span>
+                            </label>
+                            <div class="input-field inline">
+                                <input type="number" min="0" value="0" class="quantidade" name="qtd-caldo-verde">
+                                <label>Quantidade</label>
+                            </div>
+                        </div>
+                        <div class="col s12 m6">
+                            <label>
+                                <input type="checkbox" class="filled-in" name="items[]" value="caldo-feijao" />
+                                <span>Caldo de Feijão - R$ 26,90</span>
+                            </label>
+                            <div class="input-field inline">
+                                <input type="number" min="0" value="0" class="quantidade" name="qtd-caldo-feijao">
+                                <label>Quantidade</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sopas -->
+                <div class="col s12">
+                    <h6>Sopas</h6>
+                    <div class="row">
+                        <div class="col s12 m6">
+                            <label>
+                                <input type="checkbox" class="filled-in" name="items[]" value="canja" />
+                                <span>Canja de Galinha - R$ 25,90</span>
+                            </label>
+                            <div class="input-field inline">
+                                <input type="number" min="0" value="0" class="quantidade" name="qtd-canja">
+                                <label>Quantidade</label>
+                            </div>
+                        </div>
+                        <div class="col s12 m6">
+                            <label>
+                                <input type="checkbox" class="filled-in" name="items[]" value="sopa-legumes" />
+                                <span>Sopa de Legumes - R$ 23,90</span>
+                            </label>
+                            <div class="input-field inline">
+                                <input type="number" min="0" value="0" class="quantidade" name="qtd-sopa-legumes">
+                                <label>Quantidade</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pães -->
+                <div class="col s12">
+                    <h6>Pães</h6>
+                    <div class="row">
+                        <div class="col s12 m6">
+                            <label>
+                                <input type="checkbox" class="filled-in" name="items[]" value="pao-caseiro" />
+                                <span>Pão Caseiro - R$ 8,90</span>
+                            </label>
+                            <div class="input-field inline">
+                                <input type="number" min="0" value="0" class="quantidade" name="qtd-pao-caseiro">
+                                <label>Quantidade</label>
+                            </div>
+                        </div>
+                        <div class="col s12 m6">
+                            <label>
+                                <input type="checkbox" class="filled-in" name="items[]" value="pao-queijo" />
+                                <span>Pão de Queijo (6 un) - R$ 12,90</span>
+                            </label>
+                            <div class="input-field inline">
+                                <input type="number" min="0" value="0" class="quantidade" name="qtd-pao-queijo">
+                                <label>Quantidade</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Observações -->
+        <div class="section">
+            <h5>Observações</h5>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">note</i>
+                    <textarea id="observacoes" name="observacoes" class="materialize-textarea"></textarea>
+                    <label for="observacoes">Alguma observação especial?</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botão de Envio -->
+        <div class="row center-align">
+            <button class="btn-large waves-effect waves-light deep-orange" type="submit">
+                Fazer Pedido
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar elementos do Materialize
+            M.updateTextFields();
+            var textareas = document.querySelectorAll('.materialize-textarea');
+            M.textareaAutoResize(textareas);
+
+            // Atualizar quantidades quando checkbox é alterado
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    var quantidadeInput = this.parentElement.nextElementSibling.querySelector('input');
+                    if (this.checked) {
+                        quantidadeInput.value = "1";
+                    } else {
+                        quantidadeInput.value = "0";
+                    }
+                });
+            });
+
+            // Atualizar checkbox quando quantidade é alterada
+            var quantidades = document.querySelectorAll('.quantidade');
+            quantidades.forEach(function(quantidade) {
+                quantidade.addEventListener('change', function() {
+                    var checkbox = this.parentElement.previousElementSibling.querySelector('input[type="checkbox"]');
+                    if (this.value > 0) {
+                        checkbox.checked = true;
+                    } else {
+                        checkbox.checked = false;
+                    }
+                });
+            });
+        });
+    </script>
+} 

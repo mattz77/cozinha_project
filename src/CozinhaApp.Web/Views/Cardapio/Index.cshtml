@@ -1,0 +1,157 @@
+@{
+    ViewData["Title"] = "Cardápio";
+}
+
+<div class="cardapio-header">
+    <h2 class="center-align">Nosso Cardápio</h2>
+    <p class="center-align flow-text">Sabores autênticos da cozinha caseira</p>
+</div>
+
+<!-- Categorias do Cardápio -->
+<div class="row">
+    <div class="col s12">
+        <ul class="tabs">
+            <li class="tab col s3"><a class="active" href="#caldos">Caldos</a></li>
+            <li class="tab col s3"><a href="#sopas">Sopas</a></li>
+            <li class="tab col s3"><a href="#paes">Pães</a></li>
+            <li class="tab col s3"><a href="#bebidas">Bebidas</a></li>
+        </ul>
+    </div>
+
+    <!-- Caldos -->
+    <div id="caldos" class="col s12">
+        <div class="menu-section">
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="~/images/caldo-verde.jpg" alt="Caldo Verde">
+                            <span class="card-title">Caldo Verde</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Tradicional caldo português com couve, batata, linguiça e azeite extra virgem.</p>
+                            <p class="price">R$ 28,90</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="~/images/caldo-feijao.jpg" alt="Caldo de Feijão">
+                            <span class="card-title">Caldo de Feijão</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Cremoso caldo de feijão com bacon, linguiça, couve e torresmo.</p>
+                            <p class="price">R$ 26,90</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sopas -->
+    <div id="sopas" class="col s12">
+        <div class="menu-section">
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="~/images/canja-galinha.jpg" alt="Canja de Galinha">
+                            <span class="card-title">Canja de Galinha</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Canja tradicional com frango caipira, arroz, cenoura e cheiro verde.</p>
+                            <p class="price">R$ 25,90</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="~/images/sopa-legumes.jpg" alt="Sopa de Legumes">
+                            <span class="card-title">Sopa de Legumes</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Sopa cremosa de legumes da estação com croutons artesanais.</p>
+                            <p class="price">R$ 23,90</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pães -->
+    <div id="paes" class="col s12">
+        <div class="menu-section">
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="~/images/pao-caseiro.jpg" alt="Pão Caseiro">
+                            <span class="card-title">Pão Caseiro</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Pão artesanal com fermentação natural (unidade).</p>
+                            <p class="price">R$ 8,90</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="~/images/pao-queijo.jpg" alt="Pão de Queijo">
+                            <span class="card-title">Pão de Queijo</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Pão de queijo mineiro tradicional (6 unidades).</p>
+                            <p class="price">R$ 12,90</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bebidas -->
+    <div id="bebidas" class="col s12">
+        <div class="menu-section">
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Sucos Naturais</span>
+                            <ul class="collection">
+                                <li class="collection-item">Laranja<span class="price">R$ 8,90</span></li>
+                                <li class="collection-item">Limão<span class="price">R$ 8,90</span></li>
+                                <li class="collection-item">Maracujá<span class="price">R$ 9,90</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Outras Bebidas</span>
+                            <ul class="collection">
+                                <li class="collection-item">Água Mineral<span class="price">R$ 4,90</span></li>
+                                <li class="collection-item">Refrigerante<span class="price">R$ 6,90</span></li>
+                                <li class="collection-item">Café Coado<span class="price">R$ 5,90</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var tabs = document.querySelectorAll('.tabs');
+            var instances = M.Tabs.init(tabs);
+        });
+    </script>
+} 

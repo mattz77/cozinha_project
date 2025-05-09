@@ -1,0 +1,95 @@
+@model CozinhaApp.Web.Models.Agendamento
+
+@{
+    ViewData["Title"] = "Confirmação do Pedido";
+}
+
+<div class="confirmacao-header">
+    <h2 class="center-align">Pedido Confirmado!</h2>
+    <p class="center-align flow-text">Obrigado por escolher a Cozinha da Dona Maria</p>
+</div>
+
+<div class="section">
+    <div class="row">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Detalhes do Pedido #@Model.Id</span>
+                    
+                    <div class="row">
+                        <div class="col s12 m6">
+                            <h6>Dados do Cliente</h6>
+                            <p><strong>Nome:</strong> @Model.Nome</p>
+                            <p><strong>Email:</strong> @Model.Email</p>
+                            <p><strong>Telefone:</strong> @Model.Telefone</p>
+                        </div>
+                        <div class="col s12 m6">
+                            <h6>Dados da Retirada</h6>
+                            <p><strong>Data:</strong> @Model.DataRetirada.ToShortDateString()</p>
+                            <p><strong>Hora:</strong> @Model.HoraRetirada.ToString(@"hh\:mm")</p>
+                            <p><strong>Status:</strong> <span class="new badge orange" data-badge-caption="">@Model.Status</span></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12">
+                            <h6>Itens do Pedido</h6>
+                            <table class="striped">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Quantidade</th>
+                                        <th>Valor Unitário</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Itens)
+                                    {
+                                        <tr>
+                                            <td>@item.Produto</td>
+                                            <td>@item.Quantidade</td>
+                                            <td>R$ @item.ValorUnitario.ToString("N2")</td>
+                                            <td>R$ @((item.Quantidade * item.ValorUnitario).ToString("N2"))</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="right-align"><strong>Total:</strong></td>
+                                        <td><strong>R$ @Model.ValorTotal.ToString("N2")</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Observacoes))
+                    {
+                        <div class="row">
+                            <div class="col s12">
+                                <h6>Observações</h6>
+                                <p>@Model.Observacoes</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row center-align">
+    <a href="@Url.Action("Index", "Home")" class="btn-large waves-effect waves-light deep-orange">
+        Voltar para a Página Inicial
+        <i class="material-icons right">home</i>
+    </a>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            M.AutoInit();
+        });
+    </script>
+} 
