@@ -12,6 +12,7 @@ namespace CozinhaApp.Web.Data
 
         public DbSet<Agendamento> Agendamentos { get; set; }
         public DbSet<AgendamentoItem> AgendamentoItens { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

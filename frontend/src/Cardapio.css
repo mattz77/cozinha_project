@@ -1,0 +1,241 @@
+.cardapio-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.cardapio-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 32px;
+  color: #333;
+}
+
+.cardapio-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+
+.cardapio-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.cardapio-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.cardapio-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.cardapio-info {
+  padding: 20px;
+  text-align: center;
+}
+
+.cardapio-preco {
+  display: block;
+  font-size: 1.2rem;
+  color: #27ae60;
+  margin: 12px 0;
+  font-weight: bold;
+}
+
+.cardapio-btn {
+  background: #ff9800;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cardapio-btn:hover {
+  background: #e67e22;
+}
+
+.cardapio-loading {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 60px;
+  color: #888;
+}
+
+.carrinho-float-btn {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  background: #27ae60;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 28px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  cursor: pointer;
+  z-index: 1001;
+  transition: background 0.2s;
+}
+.carrinho-float-btn:hover {
+  background: #219150;
+}
+
+.cardapio-detalhe-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  margin-top: 8px;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.cardapio-detalhe-btn:hover {
+  background: #125ea2;
+}
+
+.modal-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.modal-detalhe {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 24px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+.modal-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+.modal-close {
+  background: #888;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  margin-top: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modal-close:hover {
+  background: #555;
+}
+
+.carrinho-bg {
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 2100;
+  display: flex;
+  justify-content: flex-end;
+}
+.carrinho-modal {
+  background: #fff;
+  width: 350px;
+  max-width: 90vw;
+  height: 100%;
+  padding: 32px 20px 20px 20px;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.carrinho-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px 0;
+  flex: 1;
+  overflow-y: auto;
+}
+.carrinho-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+.carrinho-item img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.carrinho-qtd {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0;
+}
+.carrinho-qtd button {
+  background: #eee;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.carrinho-remove {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+.carrinho-remove:hover {
+  background: #c0392b;
+}
+.carrinho-total {
+  font-size: 1.2rem;
+  margin: 18px 0 8px 0;
+  text-align: right;
+}
+.carrinho-finalizar {
+  background: #27ae60;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  width: 100%;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.carrinho-finalizar:hover {
+  background: #219150;
+} 
