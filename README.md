@@ -1,6 +1,6 @@
 # CozinhaApp
 
-Sistema completo de vendas de comidas caseiras, com backend em .NET/ASP.NET Core e frontend em React, inspirado em layout Figma de food delivery.
+Sistema completo de vendas de comidas caseiras, com backend em .NET/ASP.NET Core e frontend em React.
 
 ## Funcionalidades
 - Cadastro, listagem e detalhes de produtos (cardápio)
