@@ -3,10 +3,10 @@ import Button from '@mui/material/Button';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function LogoutGoogle() {
-  const handleLogout = () => {
-    fetch('http://localhost:5000/api/auth/logout', { credentials: 'include' })
-      .then(() => window.location.reload());
-  };
+    const handleLogout = () => {
+        fetch('http://localhost:5233/api/auth/logout', { credentials: 'include' })
+            .then(() => window.location.reload());
+    };
 
   return (
     <Button 

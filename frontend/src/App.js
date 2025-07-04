@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { UserProvider } from './components/UserContext';
 import { SnackbarProvider } from './components/SnackbarContext';
+import { CartProvider } from './components/CartContext';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Cardapio from './pages/Cardapio';
@@ -13,17 +14,19 @@ function App() {
   return (
     <UserProvider>
       <SnackbarProvider>
-        <Router>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/cardapio" element={<Cardapio />} />
-              <Route path="/produto/:id" element={<ProdutoDetalhe />} />
-              <Route path="/agendamento" element={<Agendamento />} />
-              <Route path="/meus-agendamentos" element={<MeusAgendamentos />} />
-            </Routes>
-          </Layout>
-        </Router>
+        <CartProvider>
+          <Router>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/cardapio" element={<Cardapio />} />
+                <Route path="/produto/:id" element={<ProdutoDetalhe />} />
+                <Route path="/agendamento" element={<Agendamento />} />
+                <Route path="/meus-agendamentos" element={<MeusAgendamentos />} />
+              </Routes>
+            </Layout>
+          </Router>
+        </CartProvider>
       </SnackbarProvider>
     </UserProvider>
   );

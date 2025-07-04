@@ -1,65 +1,35 @@
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
-import { Link, useLocation } from 'react-router-dom';
-import UserInfo from './UserInfo';
-
-const menuItems = [
-  { text: 'Início', path: '/' },
-  { text: 'Cardápio', path: '/cardapio' },
-  { text: 'Agendar Pedido', path: '/agendamento' },
-  { text: 'Meus Agendamentos', path: '/meus-agendamentos' },
-];
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import CartView from "./CartView";
+import { useCart } from "./CartContext";
 
 export default function Layout({ children }) {
-  const [open, setOpen] = React.useState(false);
-  const location = useLocation();
-
-  const toggleDrawer = (state) => () => setOpen(state);
-
-  // Fecha o Drawer automaticamente ao navegar em mobile
-  React.useEffect(() => {
-    setOpen(false);
-  }, [location.pathname]);
+  const [cartOpen, setCartOpen] = useState(false);
+  const { cart } = useCart();
+  const totalItens = cart.reduce((sum, item) => sum + item.quantidade, 0);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)} size="large">
-            <MenuIcon fontSize="inherit" />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontSize: { xs: 18, sm: 24 } }}>
-            CozinhaApp
-          </Typography>
-          <UserInfo />
-        </Toolbar>
-      </AppBar>
-      <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
-        <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-          <List>
-            {menuItems.map((item) => (
-              <ListItem key={item.text} disablePadding>
-                <ListItemButton component={Link} to={item.path} aria-label={`Ir para ${item.text}`}>
-                  <ListItemText primary={item.text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-        </Box>
-      </Drawer>
-      <Box sx={{ p: { xs: 1, sm: 3 }, minHeight: 'calc(100vh - 64px)' }}>{children}</Box>
-    </Box>
+    <>
+      <header style={{ background: '#1a3c34', color: '#fffbe9', padding: '1rem 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 100 }}>
+        <div style={{ marginLeft: '2rem' }}>
+          <Link to="/" style={{ color: '#fffbe9', textDecoration: 'none', fontWeight: 'bold', fontSize: '1.7rem', letterSpacing: '2px' }}>
+            COZINHA CASEIRA
+          </Link>
+        </div>
+        <nav style={{ marginRight: '2rem', display: 'flex', alignItems: 'center', gap: '2rem' }}>
+          <Link to="/cardapio" style={{ color: '#fffbe9', textDecoration: 'none', fontSize: '1.1rem' }}>Cardápio</Link>
+          <Link to="/agendamento" style={{ color: '#fffbe9', textDecoration: 'none', fontSize: '1.1rem' }}>Agendamento</Link>
+          <Link to="/meus-agendamentos" style={{ color: '#fffbe9', textDecoration: 'none', fontSize: '1.1rem' }}>Meus Agendamentos</Link>
+          <button onClick={() => setCartOpen(true)} style={{ background: '#ffb300', color: '#1a3c34', border: 'none', borderRadius: '50%', width: 40, height: 40, position: 'relative', cursor: 'pointer', fontWeight: 'bold', fontSize: '1.3rem' }}>
+            🛒
+            {totalItens > 0 && (
+              <span style={{ position: 'absolute', top: 2, right: 2, background: '#ff9100', color: '#fff', borderRadius: '50%', fontSize: 12, padding: '2px 6px', fontWeight: 'bold' }}>{totalItens}</span>
+            )}
+          </button>
+        </nav>
+      </header>
+      <main>{children}</main>
+      {cartOpen && <CartView onClose={() => setCartOpen(false)} />}
+    </>
   );
 }

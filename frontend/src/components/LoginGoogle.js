@@ -4,7 +4,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 
 export default function LoginGoogle() {
   const handleLogin = () => {
-    window.location.href = 'http://localhost:5000/api/auth/login-google?returnUrl=http://localhost:3000';
+      window.location.href = "http://localhost:5233/api/auth/login-google?returnUrl=http://localhost:3000";
   };
 
   return (

@@ -43,13 +43,20 @@ namespace CozinhaApp.Api.Controllers
 
         [HttpGet("me")]
         [Authorize]
-        public async Task<ActionResult<Usuario>> GetMe()
+        public async Task<IActionResult> GetMe()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Console.WriteLine($"[GetMe] Buscando usuário com ID: {userId}");
             if (userId == null) return Unauthorized();
             var usuario = await _context.Usuarios.FindAsync(userId);
             if (usuario == null) return NotFound();
-            return usuario;
+
+            return Ok(new
+            {
+                nome = usuario.Nome,
+                email = usuario.Email,
+                foto = usuario.FotoUrl
+            });
         }
     }
 }

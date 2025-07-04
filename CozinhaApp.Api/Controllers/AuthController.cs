@@ -23,7 +23,9 @@ namespace CozinhaApp.Api.Controllers
         [HttpGet("login-google")]
         public IActionResult LoginGoogle(string returnUrl = "/")
         {
-            var properties = new AuthenticationProperties { RedirectUri = returnUrl };
+            // Redireciona para o endpoint de callback do backend
+            var redirectUrl = "/api/auth/google-callback";
+            var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
             return Challenge(properties, GoogleDefaults.AuthenticationScheme);
         }
 
@@ -47,24 +49,33 @@ namespace CozinhaApp.Api.Controllers
             var email = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             var fotoUrl = claims?.FirstOrDefault(c => c.Type == "picture")?.Value;
 
+            Console.WriteLine($"[GoogleCallback] Salvando usuário com ID: {id}");
+
             if (id == null || nome == null || email == null)
                 return Unauthorized();
 
-            // Salva ou atualiza o usuário no banco
-            var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario == null)
+            try
             {
-                usuario = new Usuario { Id = id, Nome = nome, Email = email, FotoUrl = fotoUrl };
-                _context.Usuarios.Add(usuario);
+                var usuario = await _context.Usuarios.FindAsync(id);
+                if (usuario == null)
+                {
+                    usuario = new Usuario { Id = id, Nome = nome, Email = email, FotoUrl = fotoUrl };
+                    _context.Usuarios.Add(usuario);
+                }
+                else
+                {
+                    usuario.Nome = nome;
+                    usuario.Email = email;
+                    usuario.FotoUrl = fotoUrl;
+                    _context.Usuarios.Update(usuario);
+                }
+                await _context.SaveChangesAsync();
             }
-            else
+            catch (Exception ex)
             {
-                usuario.Nome = nome;
-                usuario.Email = email;
-                usuario.FotoUrl = fotoUrl;
-                _context.Usuarios.Update(usuario);
+                Console.WriteLine($"[GoogleCallback] Erro ao salvar usuário: {ex.Message}");
+                throw;
             }
-            await _context.SaveChangesAsync();
 
             // Redireciona para o frontend
             return Redirect("http://localhost:3000");
