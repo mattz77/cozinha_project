@@ -1,0 +1,37 @@
+/* Animações para mensagens de feedback */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.feedback-message {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.feedback-message:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Classe para animação de saída */
+.feedback-message.fade-out {
+  animation: fadeOut 0.3s ease-in forwards;
+} 

@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/Home.css";
 import { useCart } from "../components/CartContext";
+import { useUser } from "../components/UserContext";
 
 const produtosDestaque = [
   {
@@ -31,6 +32,7 @@ const produtosDestaque = [
 
 export default function Home() {
   const { addToCart } = useCart();
+  const { user } = useUser();
 
   return (
     <div className="home">
@@ -41,7 +43,14 @@ export default function Home() {
           <h1>Nesse friozinho...</h1>
           <h2>QUE TAL TOMAR CALDOS OU SOPAS?</h2>
           <p>Aqueça seu dia com opções variadas de caldos e sopas.<br/>Descubra o prazer de uma boa refeição!</p>
-          <a href="tel:11999999999" className="banner-btn">FAÇA SEU PEDIDO<br/>(11) 99999-9999</a>
+          <div className="banner-buttons">
+            <a href="tel:11999999999" className="banner-btn">FAÇA SEU PEDIDO<br/>(11) 99999-9999</a>
+            {!user && (
+              <button className="banner-btn login-btn" onClick={() => window.location.href = '/login'}>
+                Login
+              </button>
+            )}
+          </div>
         </div>
       </section>
       <section className="categorias">

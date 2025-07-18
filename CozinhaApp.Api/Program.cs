@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.Authentication.Google;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// JWT Settings
+builder.Services.Configure<CozinhaApp.Api.Models.JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+builder.Services.AddSingleton<CozinhaApp.Api.Models.JwtTokenHelper>();
+
 // Add services to the container.
 builder.Services.AddControllers();
 

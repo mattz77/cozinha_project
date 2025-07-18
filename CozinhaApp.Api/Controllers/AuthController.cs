@@ -15,9 +15,43 @@ namespace CozinhaApp.Api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public AuthController(ApplicationDbContext context)
+        private readonly JwtTokenHelper _jwtTokenHelper;
+        public AuthController(ApplicationDbContext context, JwtTokenHelper jwtTokenHelper)
         {
             _context = context;
+            _jwtTokenHelper = jwtTokenHelper;
+        }
+
+        // Cadastro tradicional
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+        {
+            if (await _context.Usuarios.AnyAsync(u => u.Email == dto.Email))
+                return BadRequest("E-mail já cadastrado.");
+
+            var usuario = new Usuario
+            {
+                Id = Guid.NewGuid().ToString(),
+                Nome = dto.Nome,
+                Email = dto.Email,
+                SenhaHash = BCrypt.Net.BCrypt.HashPassword(dto.Senha)
+            };
+            _context.Usuarios.Add(usuario);
+            await _context.SaveChangesAsync();
+            var token = _jwtTokenHelper.GenerateToken(usuario.Id, usuario.Nome, usuario.Email);
+            return Ok(new { usuario.Id, usuario.Nome, usuario.Email, token });
+        }
+
+        // Login tradicional
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto dto)
+        {
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == dto.Email);
+            if (usuario == null || string.IsNullOrEmpty(usuario.SenhaHash) || !BCrypt.Net.BCrypt.Verify(dto.Senha, usuario.SenhaHash))
+                return Unauthorized("E-mail ou senha inválidos.");
+
+            var token = _jwtTokenHelper.GenerateToken(usuario.Id, usuario.Nome, usuario.Email);
+            return Ok(new { usuario.Id, usuario.Nome, usuario.Email, token });
         }
 
         [HttpGet("login-google")]
@@ -54,9 +88,10 @@ namespace CozinhaApp.Api.Controllers
             if (id == null || nome == null || email == null)
                 return Unauthorized();
 
+            Usuario usuario;
             try
             {
-                var usuario = await _context.Usuarios.FindAsync(id);
+                usuario = await _context.Usuarios.FindAsync(id);
                 if (usuario == null)
                 {
                     usuario = new Usuario { Id = id, Nome = nome, Email = email, FotoUrl = fotoUrl };
@@ -77,8 +112,9 @@ namespace CozinhaApp.Api.Controllers
                 throw;
             }
 
-            // Redireciona para o frontend
-            return Redirect("http://localhost:3000");
+            // Gera JWT e redireciona para o frontend com token
+            var token = _jwtTokenHelper.GenerateToken(usuario.Id, usuario.Nome, usuario.Email);
+            return Redirect($"http://localhost:3000/google-callback?token={token}&nome={Uri.EscapeDataString(usuario.Nome)}&email={Uri.EscapeDataString(usuario.Email)}");
         }
     }
 }

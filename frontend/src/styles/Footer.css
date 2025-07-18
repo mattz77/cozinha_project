@@ -1,0 +1,162 @@
+/* Estilos para o rodapé */
+footer {
+  background: linear-gradient(135deg, #1a3c34 0%, #2d5a4a 100%);
+  color: #fffbe9;
+  padding: 2rem 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ffb300, #ff9100);
+}
+
+footer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer-info p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.footer-payment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-payment p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.payment-methods {
+  height: 40px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  transform: scale(1);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 4px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.payment-methods:hover {
+  opacity: 1;
+  transform: translateX(-50%) scale(1.05);
+}
+
+.payment-text {
+  font-size: 0.75rem !important;
+  opacity: 0.8 !important;
+  letter-spacing: 0.5px;
+  margin-top: 0.25rem !important;
+}
+
+.payment-icons {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+}
+
+.payment-fallback {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment-icon {
+  font-size: 1.5rem;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.payment-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  footer {
+    padding: 1.5rem 0;
+    font-size: 0.8rem;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .footer-payment {
+    order: -1;
+  }
+  
+  .payment-methods {
+    height: 35px;
+    max-width: 180px;
+  }
+} 

@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx -y @modelcontextprotocol/server-filesystem",
+      "args": [
+        "C:/Users/olive/Desktop/cozinha_project",
+        "C:/Users/olive/Desktop/cozinha_project/frontend",
+        "C:/Users/olive/Desktop/cozinha_project/src",
+        "C:/Users/olive/Desktop/cozinha_project/src/CozinhaApp.Web",
+        "C:/Users/olive/Desktop/cozinha_project/src/CozinhaApp.Web/Controllers",
+        "C:/Users/olive/Desktop/cozinha_project/src/CozinhaApp.Web/Models",
+        "C:/Users/olive/Desktop/cozinha_project/src/CozinhaApp.Web/Data",
+        "C:/Users/olive/Desktop/cozinha_project/src/CozinhaApp.Web/Migrations",
+        "C:/Users/olive/Desktop/cozinha_project/src/CozinhaApp.Web/ViewModels",
+        "C:/Users/olive/Desktop/cozinha_project/src/CozinhaApp.Web/Views",
+        "C:/Users/olive/Desktop/cozinha_project/src/CozinhaApp.Web/wwwroot"
+      ]
+    }
+  }
+} 

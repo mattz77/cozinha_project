@@ -6,6 +6,7 @@ import LogoutGoogle from './LogoutGoogle';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { getPrimeirosNomes } from '../utils/nameUtils';
 
 export default function UserInfo() {
   const { user, setUser } = useUser();
@@ -19,13 +20,13 @@ export default function UserInfo() {
   if (!user) return <LoginGoogle />;
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, minWidth: 0 }}>
-      <Avatar src={user.fotoUrl} alt={user.nome} sx={{ width: 32, height: 32 }} />
+      <Avatar src={user.fotoUrl} alt={getPrimeirosNomes(user.nome)} sx={{ width: 32, height: 32 }} />
       <Typography 
         variant="body2" 
         sx={{ maxWidth: { xs: 60, sm: 120 }, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
-        aria-label={`Usuário logado: ${user.nome}`}
+        aria-label={`Usuário logado: ${getPrimeirosNomes(user.nome)}`}
       >
-        {user.nome}
+        {getPrimeirosNomes(user.nome)}
       </Typography>
       <LogoutGoogle />
     </Box>
